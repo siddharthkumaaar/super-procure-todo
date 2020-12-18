@@ -12,7 +12,11 @@ class NavBar extends Component {
   }
 
   handleLogout = () => {
-    this.props.logOut(null,"")
+    const payload ={
+      userId:null,
+      name:""
+    }
+    this.props.logoutRequest(payload)
   }
 
   render() {
@@ -24,6 +28,7 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
+              <Nav.Link><Link to="/"><span className="text-white">Home</span></Link></Nav.Link>
               <Nav.Link><Link to="/login"><span className="text-white">Login</span></Link></Nav.Link>
               <Nav.Link><Link to="/signup"><span className="text-white">Sign Up</span></Link></Nav.Link>
             </Nav>
@@ -49,14 +54,14 @@ class NavBar extends Component {
 
 const mapStateToProps = (state) => {
   return{
-      userId:state.userId,
-      name:state.name
+      userId:state.login.userId,
+      name:state.login.name
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      logOut:(id,name) =>{dispatch(logOut(id,name))}
+      logoutRequest:(payload) =>{dispatch(logOut(payload))}
   }
 }
 

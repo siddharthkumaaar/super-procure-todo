@@ -5,13 +5,14 @@ import Login from './component/Login';
 import Signup from './component/Signup';
 import {Route,Switch,Link} from 'react-router-dom'
 import Dashboard from './component/Dashboard';
+import HomePage from './component/HomePage';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <Switch>
-        <Route exact path="/" component={()=>{return <div>Hello</div>}}/>
+        <Route exact path="/" component={HomePage}/>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
         <Route path="/dashboard" exact render={() => <Dashboard />} />

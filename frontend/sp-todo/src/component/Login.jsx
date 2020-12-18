@@ -1,8 +1,7 @@
 import React from 'react'
 import { Component } from 'react';
 import {connect} from 'react-redux'
-import axios from 'axios'
-import {logIn} from '../Redux/actions'
+import {userlogIn} from '../Redux/actions'
 import { Redirect } from 'react-router-dom';
 
 class Login extends Component{
@@ -19,39 +18,21 @@ class Login extends Component{
 
     handleLogin = (e) => {
           e.preventDefault()
-          const {email,pword,users} = this.state
-        //   console.log(this.props)
-            for(let i=0; i<users.length; i++)
-            {
-                if(users[i].email===email && users[i].password===pword)
-                {
-                    this.props.logIn(users[i].id,users[i].full_name)
-                }
+          const {email,pword} = this.state
+            const payload = {
+                email:email,
+                password:pword
             }
 
-    }
+            this.props.loginRequest(payload)
 
-    componentDidMount(){
-        axios({
-            url:"http://localhost:3001/users",
-            method:"get"
-        })
-        .then(res=>res.data)
-        .then(res=>{
-            this.setState({
-                users:res
-            })
-
-        })
-        .catch(err=>{
-            console.log(err)
-        })
     }
 
     render(){
         // const {users} = this.state
         // console.log(this.props)
-        console.log(this.props)
+        // this.setState({isAuth:this.props.isAuth})
+        // console.log(this.props)
         if(this.props.userId==null){
             return(
                 <div className="container">
@@ -91,12 +72,13 @@ class Login extends Component{
 }
 const mapStateToProps = (state) => {
     return {
-        userId:state.userId
+        userId:state.login.userId,
+        isAuth:state.login.isAuth
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        logIn:(id,name) =>{dispatch(logIn(id,name))}
+        loginRequest:(payload) =>{dispatch(userlogIn(payload))}
     }
 }
 

@@ -1,16 +1,8 @@
 {
-    "users":[
-        {
-            "id":1,
-            "full_name":"Siddharth Kumar",
-            "email":"sidharth@gmail.com",
-            "password":"si@823003"
-        },
-        {
-            "id":2,
-            "full_name":"Pumpy",
-            "email":"pumpy@gmail.com",
-            "password":"pu823003"
-        }
-    ]
+  "users": [
+    
+  ],
+  "todo": [
+    
+  ]
 }

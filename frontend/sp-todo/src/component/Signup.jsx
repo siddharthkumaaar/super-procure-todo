@@ -1,5 +1,7 @@
 import React from 'react'
 import { Component } from 'react';
+import {connect} from 'react-redux'
+import {userRegister} from '../Redux/signupAction'
 
 class Signup extends Component{
 
@@ -15,9 +17,17 @@ class Signup extends Component{
 
     handleSignup = (e) => {
           e.preventDefault()
-          console.log(this.state.email,this.state.pword,this.state.fullname)  
+          const {email,pword,fullname} = this.state
+          console.log(this.state.email,this.state.pword,this.state.fullname)
+          const payload = {
+              email:email,
+              password:pword,
+              fullname:fullname
+          }
+          this.props.userRegReq(payload)
     }
     render(){
+        console.log(this.props)
         return(
             <div className="container">
                 <div className="row">
@@ -48,9 +58,37 @@ class Signup extends Component{
                     </div>
                     <div className="col-lg-4"></div>
                 </div>
+                <div className="row">
+                    <div className="col-lg-12">
+                        {this.props.isLoading ? <div className="alert alert-warning" role="alert">Processing....</div>:""}
+                    </div>
+                    <div className="col-lg-12">
+                        {this.props.error ? <div className="alert alert-danger" role="alert">Some Error...!</div>:""}
+                    </div>
+                    <div className="col-lg-12">
+                        {this.props.message ? <div className="alert alert-success" role="alert">Congratulation Mr {this.props.message}, You have successfully registered, Please Login</div>:""}
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default Signup
+const mapStateToProps = (state) => {
+    return {
+        isLoading:state.signup.isLoading,
+        error:state.signup.error,
+        isAuth:state.signup.isAuth,
+        message:state.signup.message
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userRegReq:(payload) => {
+            dispatch(userRegister(payload))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Signup)
