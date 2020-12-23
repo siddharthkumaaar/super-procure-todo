@@ -33,7 +33,7 @@ class Login extends Component{
         // console.log(this.props)
         // this.setState({isAuth:this.props.isAuth})
         // console.log(this.props)
-        if(this.props.userId==null){
+        if(this.props.isAuth===false){
             return(
                 <div className="container">
                     <div className="row">
@@ -47,11 +47,11 @@ class Login extends Component{
                                     <form onSubmit={this.handleLogin}>
                                         <div className="form-group">
                                             <label>Email Address</label>
-                                            <input type="email" id="email" name="email" className="form-control" placeholder="Enter Your Email" value={this.state.email} onChange={(e)=>{this.setState({email:e.target.value})}}/>
+                                            <input type="email" id="email" name="email" className="form-control" placeholder="Enter Your Email" value={this.state.email} onChange={(e)=>{this.setState({email:e.target.value})}} required/>
                                         </div>
                                         <div className="form-group">
                                             <label>Password</label>
-                                            <input name="pword" type="password" id="pword" className="form-control" placeholder="Enter Your Password" value={this.state.pword} onChange={(e)=>{this.setState({pword:e.target.value})}}/>
+                                            <input name="pword" type="password" id="pword" className="form-control" placeholder="Enter Your Password" value={this.state.pword} onChange={(e)=>{this.setState({pword:e.target.value})}} required/>
                                         </div>
                                         <button type="submit" className="btn btn-primary">Login</button>
                                     </form>

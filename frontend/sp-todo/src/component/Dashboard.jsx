@@ -2,8 +2,8 @@ import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
 import styled from "./dashboard.module.css";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faStar} from '@fortawesome/free-solid-svg-icons'
+// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+// import {faStar} from '@fortawesome/free-solid-svg-icons'
 import {addingTask,fetchingData,completeTask,deleteTask} from '../Redux/dashboardAction'
 import EditPage from "./EditPage";
 
@@ -20,6 +20,7 @@ class Dashboard extends Component {
   }
   
   componentDidMount(){
+    console.log(this.props.userId)
     this.props.getData(this.props.userId)
   }
 
@@ -116,7 +117,7 @@ class Dashboard extends Component {
                     aria-describedby="basic-addon1"
                     value={this.state.addTask}
                     onChange={(e)=>this.setState({addTask:e.target.value})}
-                  />
+                  required/>
                   <button className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
                 </div>
               </div>

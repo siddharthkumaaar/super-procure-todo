@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/" component={HomePage}/>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
-        <Route path="/dashboard" exact render={() => <Dashboard />} />
+        <Route exact path="/dashboard" render={()=> <Dashboard />} />
         <Route>
             <div>Error 404 </div>
             <Link to="/">GO BACK HOME</Link>

@@ -42,7 +42,7 @@ export const fetchingData = (payload) => (dispatch) => {
     }
   })
     .then((res) => {
-        console.log(res)
+        // console.log(res)
         if(res.status === 200){
           const res2 = res.data
           dispatch(fetchDataSuccess({res2}));
@@ -116,18 +116,19 @@ export const completeTask = (payload) => (dispatch) => {
       .then((res) => {
         // console.log(res)
         if(res.status === 200){
+          // console.log(res)
             return axios({
               url:"http://localhost:3001/todo",
               method:"get",
               params:{
-                userid:res.id
+                userid:res.data.userid
               }
             })
           }
       })
-      .then((res)=>{
-        // console.log(res)
-        dispatch(taskCompleteSuccess(res.data));})
+      .then((res2)=>{
+        // console.log(res2)
+        dispatch(taskCompleteSuccess(res2.data));})
       .catch((err) => {
         dispatch(taskCompleteFail(err));
       });
@@ -191,7 +192,7 @@ export const addSubTaskFail = (payload) => ({
     payload
   });
 
-export const addSubTask = (payload) => (dispatch) => {
+export const addsubtask = (payload) => (dispatch) => {
     // console.log(payload)
     dispatch(addSubTaskReq());
     axios({
@@ -206,7 +207,7 @@ export const addSubTask = (payload) => (dispatch) => {
               url:"http://localhost:3001/todo",
               method:"get",
               params:{
-                userid:res.id
+                userid:res.data.userid
               }
             })
           }

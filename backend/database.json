@@ -1,8 +1,23 @@
 {
   "users": [
-    
+    {
+      "email": "siddharthkumaaar@gmail.com",
+      "password": "123456",
+      "fullname": "siddharth Kumar",
+      "id": 1
+    },
+    {
+      "email": "masai@gmail.com",
+      "password": "123456",
+      "fullname": "masai",
+      "id": 2
+    },
+    {
+      "email": "jambo@gmail.com",
+      "password": "123",
+      "fullname": "jambo",
+      "id": 3
+    }
   ],
-  "todo": [
-    
-  ]
+  "todo": []
 }

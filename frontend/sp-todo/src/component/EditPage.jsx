@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { Modal, Button, Row, Col, Container, Form } from "react-bootstrap";
 import {connect} from 'react-redux'
-import {addSubTask} from '../Redux/dashboardAction'
+import {addsubtask} from '../Redux/dashboardAction'
 
 class EditPage extends Component{
   constructor(props){
@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addSubTask:(payload)=>{dispatch(addSubTask(payload))}
+    addSubTask:(payload)=>{dispatch(addsubtask(payload))}
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(EditPage);

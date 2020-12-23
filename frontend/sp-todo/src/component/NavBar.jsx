@@ -6,31 +6,27 @@ import {connect} from 'react-redux'
 import {logOut} from '../Redux/actions'
  
 class NavBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  
 
   handleLogout = () => {
-    const payload ={
-      userId:null,
-      name:""
-    }
-    this.props.logoutRequest(payload)
+    
+    this.props.logoutRequest()
   }
 
+  
   render() {
-    if(this.props.userId===null)
+    const isAuth = JSON.parse(localStorage.getItem("user"))
+    if(this.props.isAuth===false || isAuth.auth===false)
     {
       return (
         <Navbar collapseOnSelect expand="lg" bg="info" variant="dark">
-          <Navbar.Brand href="#home">Super Procure Todo</Navbar.Brand>
+          <Navbar.Brand href="#home">My Todo Task</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link><Link to="/"><span className="text-white">Home</span></Link></Nav.Link>
-              <Nav.Link><Link to="/login"><span className="text-white">Login</span></Link></Nav.Link>
-              <Nav.Link><Link to="/signup"><span className="text-white">Sign Up</span></Link></Nav.Link>
+              <Link to="/"><span className="text-white m-3">Home</span></Link>
+              <Link to="/login"><span className="text-white m-3">Login</span></Link>
+              <Link to="/signup"><span className="text-white m-3">Sign Up</span></Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -39,7 +35,7 @@ class NavBar extends Component {
     }else{
       return (
         <Navbar collapseOnSelect expand="lg" bg="info" variant="dark">
-          <Navbar.Brand href="#home">Super Procure Todo</Navbar.Brand>
+          <Navbar.Brand>My Todo Task</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
@@ -55,7 +51,8 @@ class NavBar extends Component {
 const mapStateToProps = (state) => {
   return{
       userId:state.login.userId,
-      name:state.login.name
+      name:state.login.name,
+      isAuth:state.login.isAuth
   }
 }
 

@@ -1,15 +1,22 @@
-import {LOG_IN_FAILURE,LOG_IN_SUCCESS,LOG_IN_REQUEST, LOG_OUT} from './actionTypes'
+import {LOG_IN_FAILURE,
+    LOG_IN_SUCCESS,
+    LOG_IN_REQUEST, 
+    LOG_OUT_REQUEST,
+    LOG_OUT_SUCCESS,
+    LOG_OUT_FAILURE} from './actionTypes'
+
+import {getData} from './LocalStore'
 
 export const initState = {
-    userId:null,
-    name:"",
+    userId: getData("user") ? getData("user").id : null,
+    name: getData("user") ? getData("user").fullname : null,
     isLoading:false,
     error:"",
-    isAuth:false,
+    isAuth: getData("user") ? getData("user").auth : false,
 }
 
 const loginreducer = (state=initState,action) => {
-    // console.log(action)
+    console.log(action.payload)
     switch(action.type){
         
         case LOG_IN_REQUEST:
@@ -22,7 +29,7 @@ const loginreducer = (state=initState,action) => {
             return {
                 ...state,
                 isLoading: false,
-                isAuth: true,
+                isAuth: action.payload.auth,
                 userId: action.payload.id,
                 name: action.payload.fullname
             };
@@ -34,13 +41,26 @@ const loginreducer = (state=initState,action) => {
                 error: action.payload
             }
 
-        case LOG_OUT:
+        case LOG_OUT_REQUEST:
             return {
                 ...state,
-                userId:action.payload.userId,
-                name:action.payload.name,
-                isAuth:false
+                isLoading:true
             }
+
+        case LOG_OUT_SUCCESS:
+            return {
+                ...state,
+                isLoading:false,
+                isAuth:action.payload
+            }
+
+        case LOG_OUT_FAILURE:
+            return {
+                ...state,
+                isLoading:false,
+                error:action.payload
+            }
+
         default:
             return state
     }
